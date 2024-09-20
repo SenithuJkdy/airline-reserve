@@ -13,19 +13,19 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/v1/users")
+@RequestMapping("/api/v1/user")
 @CrossOrigin
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @PostMapping("/addu")
+    @PostMapping("/add-user")
     public ResponseEntity<User> registerUser(@RequestBody User user) {
         return ResponseEntity.ok(userService.registerUser(user));
     }
 
-    @GetMapping("/getu")
+    @GetMapping("/users")
     public ResponseEntity<List<User>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
     }
@@ -38,7 +38,7 @@ public class UserController {
             // Return the user ID in the response
             Map<String, Object> response = new HashMap<>();
             response.put("message", "Login successful");
-            response.put("userId", authenticatedUser.getId());
+            response.put("id", authenticatedUser.getId());
 
             return ResponseEntity.ok(response);
         } else {

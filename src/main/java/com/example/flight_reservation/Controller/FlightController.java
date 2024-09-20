@@ -9,19 +9,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/flights")
+@RequestMapping("/api/v1/user")
 @CrossOrigin
 public class FlightController {
 
     @Autowired
     private FlightService flightService;
 
-    @PostMapping("/addf")
+    @PostMapping("/add-flight")
     public ResponseEntity<Flight> addFlight(@RequestBody Flight flight) {
         return ResponseEntity.ok(flightService.addFlight(flight));
     }
 
-    @GetMapping("/getf")
+    @GetMapping("/flights")
     public ResponseEntity<List<Flight>> getAllFlights() {
         return ResponseEntity.ok(flightService.getAllFlights());
     }

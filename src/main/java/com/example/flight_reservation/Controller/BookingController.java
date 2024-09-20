@@ -10,23 +10,23 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/bookings")
+@RequestMapping("/api/v1/user")
 @CrossOrigin
 public class BookingController {
     @Autowired
     private BookingService bookingService;
 
-    @PostMapping("/addb")
+    @PostMapping("/add-booking")
     public ResponseEntity<Booking> createBooking(@RequestBody Booking booking) {
         return ResponseEntity.ok(bookingService.createBooking(booking));
     }
 
-    @GetMapping("/getb")
+    @GetMapping("/bookings")
     public ResponseEntity<List<Booking>> getAllBookings() {
         return ResponseEntity.ok(bookingService.getAllBookings());
     }
 
-    @GetMapping("/getid/{id}")
+    @GetMapping("/bookings/{id}")
     public Booking getBooking(@PathVariable int id) {
         return bookingService.getBooking(id);
     }
