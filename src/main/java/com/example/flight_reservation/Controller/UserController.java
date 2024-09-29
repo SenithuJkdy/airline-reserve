@@ -13,24 +13,19 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/v1/user")
+@RequestMapping("/api/v1")
 @CrossOrigin
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @PostMapping("/add-user")
+    @PostMapping("/auth/register")
     public ResponseEntity<User> registerUser(@RequestBody User user) {
         return ResponseEntity.ok(userService.registerUser(user));
     }
 
-    @GetMapping("/users")
-    public ResponseEntity<List<User>> getAllUsers() {
-        return ResponseEntity.ok(userService.getAllUsers());
-    }
-
-    @PostMapping("/login")
+    @PostMapping("/auth/login")
     public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest) {
         User authenticatedUser = userService.authenticate(loginRequest.getEmail(), loginRequest.getPassword());
 
@@ -44,6 +39,22 @@ public class UserController {
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
         }
+    }
+
+    @GetMapping("/users")
+    public ResponseEntity<List<User>> getAllUsers() {
+        return ResponseEntity.ok(userService.getAllUsers());
+    }
+
+    @PutMapping("/users/{id}")
+    public ResponseEntity<User> updateUser(@RequestBody User user){
+        return ResponseEntity.ok(userService.updateUser(user));
+    }
+
+    @DeleteMapping("/users/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable int id) {
+        userService.deleteUserById(id);
+        return ResponseEntity.ok("User and related bookings deleted successfully.");
     }
 }
 

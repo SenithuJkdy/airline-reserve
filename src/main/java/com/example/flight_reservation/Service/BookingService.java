@@ -42,5 +42,10 @@ public class BookingService {
 
         return bookingRepository.save(booking);
     }
+
+    public String deleteBookingById(int id){
+        userRepository.deleteById(id);
+        return id+" booking removed";
+    }
 }
 

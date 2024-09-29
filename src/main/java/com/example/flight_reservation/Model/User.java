@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -18,8 +20,9 @@ public class User {
     private String name;
     @Column(unique = true)
     private String email;
-
     private String password; // Ideally, you should encrypt this
 
-// Getters and Setters
+    @ManyToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    private List<Booking> bookings;
+
 }

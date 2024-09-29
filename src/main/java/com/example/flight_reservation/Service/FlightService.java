@@ -20,4 +20,21 @@ public class FlightService {
     public List<Flight> getAllFlights() {
         return flightRepository.findAll();
     }
+
+    public String deleteFlights(int id){
+         flightRepository.findById(id);
+        return "Flight removed successfully";
+    }
+
+    public  Flight updateFlight(Flight flight){
+        Flight updateFlight = flightRepository.findById(flight.getId()).orElse(null);
+        if (updateFlight!=null){
+            updateFlight.setFlightNumber(flight.getFlightNumber());
+            updateFlight.setDeparture(flight.getDeparture());
+            updateFlight.setDestination(flight.getDestination());
+            flightRepository.save(updateFlight);
+            return updateFlight;
+        }
+        return null;
+    }
 }

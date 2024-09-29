@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/user")
+@RequestMapping("/api/v1")
 @CrossOrigin
 public class FlightController {
 
     @Autowired
     private FlightService flightService;
 
-    @PostMapping("/add-flight")
+    @PostMapping("/flights")
     public ResponseEntity<Flight> addFlight(@RequestBody Flight flight) {
         return ResponseEntity.ok(flightService.addFlight(flight));
     }
@@ -25,5 +25,17 @@ public class FlightController {
     public ResponseEntity<List<Flight>> getAllFlights() {
         return ResponseEntity.ok(flightService.getAllFlights());
     }
+
+    @PutMapping("/flights/{id}")
+    public Flight updateFlight(@RequestBody Flight flight){
+        return flightService.updateFlight(flight);
+    }
+
+    @DeleteMapping("/flights/{id}")
+    public String deleteFlight(@PathVariable int id){
+        flightService.deleteFlights(id);
+        return "flight deleted";
+    }
+
 }
 
