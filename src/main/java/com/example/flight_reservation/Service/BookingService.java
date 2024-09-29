@@ -43,6 +43,17 @@ public class BookingService {
         return bookingRepository.save(booking);
     }
 
+    public Booking updateBooking(Booking booking){
+        Booking updateBooking = bookingRepository.findById(booking.getId()).orElse(null);
+        if (updateBooking!=null){
+            updateBooking.setFlight(booking.getFlight());
+            updateBooking.setBookingDate(booking.getBookingDate());
+            bookingRepository.save(updateBooking);
+            return updateBooking;
+        }
+        return null;
+    }
+
     public String deleteBookingById(int id){
         userRepository.deleteById(id);
         return id+" booking removed";

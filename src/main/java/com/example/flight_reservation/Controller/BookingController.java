@@ -1,6 +1,7 @@
 package com.example.flight_reservation.Controller;
 
 import com.example.flight_reservation.Model.Booking;
+import com.example.flight_reservation.Model.Flight;
 import com.example.flight_reservation.Service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,11 @@ public class BookingController {
     @GetMapping("/bookings/{id}")
     public Booking getBooking(@PathVariable int id) {
         return bookingService.getBooking(id);
+    }
+
+    @PutMapping("/bookings/{id}")
+    public Booking updateFlight(@RequestBody Booking booking){
+        return bookingService.updateBooking(booking);
     }
 
     @DeleteMapping("/bookings/{id}")
